@@ -6,7 +6,7 @@ shinyServer(function(input, output) {
    ggplotly({
     # filter CPU utilization to reflect user selections
     data <- CPU %>%
-      filter(seconds >= input$selectSeconds[1] & seconds <= input$selectSeconds[2]) %>%
+      filter(seconds >= (max(sliderSeconds) * input$selectSeconds[1] / 100) & seconds <= (max(sliderSeconds) * input$selectSeconds[2]) / 100 ) %>%
       filter(execution %in% input$selectTag)
       
     # increase the number of colors of brewer with colorRampPalette  
@@ -39,7 +39,7 @@ shinyServer(function(input, output) {
     ggplotly({
       
       data <- DISK %>%
-        filter(seconds >= input$selectSeconds[1] & seconds <= input$selectSeconds[2]) %>%
+        filter(seconds >= (max(sliderSeconds) * input$selectSeconds[1] / 100) & seconds <= (max(sliderSeconds) * input$selectSeconds[2]) / 100 ) %>%
         filter(execution %in% input$selectTag) # %>%
 
       ggplot(data, aes(x = seconds, y = util, col = execution)) +
@@ -57,7 +57,7 @@ shinyServer(function(input, output) {
     ggplotly({
       
       data <- MEM %>%
-        filter(seconds >= input$selectSeconds[1] & seconds <= input$selectSeconds[2]) %>%
+        filter(seconds >= (max(sliderSeconds) * input$selectSeconds[1] / 100) & seconds <= (max(sliderSeconds) * input$selectSeconds[2]) / 100 ) %>%
         filter(execution %in% input$selectTag) 
       
       ggplot(data, aes(x = seconds, y = Memory, col = execution)) +
