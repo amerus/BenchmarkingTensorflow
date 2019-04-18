@@ -19,6 +19,8 @@ def draw_box(box, image_np):
 
     fig = plt.figure()
     ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax.set_axis_off()
+    fig.set_size_inches(13,10)
     fig.add_axes(ax)
 
     #draw blurred boxes around box
@@ -59,7 +61,7 @@ with detection_graph.as_default():
         [boxes, scores, classes, num_detections],
         feed_dict={image_tensor: np.expand_dims(image_np, axis=0)})
 
-    if scores[0][0] < 0.1:
+    if scores[0][0] < 0.0001:
         sys.exit('Wally not found :(')
 
     print('Wally found')

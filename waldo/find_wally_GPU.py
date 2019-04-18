@@ -19,6 +19,9 @@ def draw_box(box, image_np):
 
     fig = plt.figure()
     ax = plt.Axes(fig, [0., 0., 1., 1.])
+    # removing black border around the image
+    ax.set_axis_off()
+    fig.set_size_inches(13,10)
     fig.add_axes(ax)
 
     #draw blurred boxes around box
@@ -64,6 +67,9 @@ with detection_graph.as_default():
 
     print('Wally found')
     fig, ax = draw_box(boxes[0][0], image_np)
-  
+
+    ax.set_xticks([]) 
+    ax.set_yticks([])
+    
     ax.imshow(image_np)
     plt.show()
