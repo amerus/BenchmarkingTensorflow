@@ -22,9 +22,7 @@ shinyUI(
           tags$h4('Tensorflow Hardware Benchmarking'),
           tags$p(),
                 sliderInput("selectSeconds", 
-                            label = "Percent of 15-Minute Runtime:",
-                            #min = min(sliderSeconds),
-                            #max = max(sliderSeconds),
+                            label = "Percent of 75-Minute Runtime:",
                             min = 0,
                             max = 100,
                             post ="%",
@@ -32,7 +30,7 @@ shinyUI(
                             sep = ""
                         ),
                 selectInput("selectTag",
-                            label = "Additional Tags:",
+                            label = "Training Resource:",
                             choices = dropDownTags,
                             multiple = TRUE,
                             selected = unlist(dropDownTags))
@@ -40,6 +38,10 @@ shinyUI(
         
         dashboardBody(
            tabsetPanel(
+             tabPanel(
+               title = "Custom BASH Shell Script",
+               uiOutput("googleSheet")
+             ),
              tabPanel(
                 title = "Processor Utilization", status = "primary", solidHeader = TRUE,
                 plotlyOutput("cpu", height = 600)
@@ -53,11 +55,11 @@ shinyUI(
               plotlyOutput("mem", height = 600)
             ),
             tabPanel(
-              title = "Processor Temperature",
+              title = "Processor Run Heat",
               plotlyOutput("cpuTemp", height = 600)
             ),
             tabPanel(
-              title = "GPU Temperature",
+              title = "GPU Run Heat",
               plotlyOutput("gpuTemp", height = 600)
             ),
             tabPanel(
@@ -66,7 +68,7 @@ shinyUI(
               actionButton("buttonGPU1", "GPU Trained"),
               actionButton("buttonCPU1", "CPU Trained"),
               tags$p(),
-              plotOutput("findGPU1")
+              plotOutput("findIMG1", height = 768)
             ),
             tabPanel(
               title = "Find Waldo - Part 2",
@@ -74,7 +76,7 @@ shinyUI(
               actionButton("buttonGPU3", "GPU Trained"),
               actionButton("buttonCPU3", "CPU Trained"),
               tags$p(),
-              plotOutput("findCPU3")
+              plotOutput("findIMG3", height = 768)
             )
          )
       )

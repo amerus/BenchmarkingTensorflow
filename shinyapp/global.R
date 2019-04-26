@@ -2,10 +2,8 @@ library(shinydashboard)
 library(tidyverse)
 library(ggplot2)
 library(plotly)
-library(RColorBrewer)
-library(reticulate)
-
-use_virtualenv('bench')
+library(googlesheets)
+library(DT)
 
 # load saved metrics from RDS files
 CPU <- readRDS('./data/cpu.RDS')
@@ -26,19 +24,3 @@ dropDownTags <- CPU %>%
   group_by(execution) %>%
   select(execution) %>%
   unique()
-
-# finding unique tags for each of the communities
-# englishOnly <- anti_join(englishData, russianData, by = "Tag")
-# russianOnly <- anti_join(russianData, englishData, by = "Tag")
-
-#engSpecTags <- as.data.frame(englishOnly) %>%
-#  group_by(Tag) %>%
-#  arrange(desc(TagProp)) %>%
-#  select(Tag) %>%
-#  unique()
-
-#rusSpecTags <- as.data.frame(russianOnly) %>%
-#  group_by(Tag) %>%
-#  arrange(desc(TagProp)) %>%
-#  select(Tag) %>%
-#  unique()
