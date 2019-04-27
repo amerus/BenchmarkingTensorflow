@@ -17,7 +17,7 @@ shinyServer(function(input, output) {
     
     # create plot from filtered data
       ggplot(data, aes(x = seconds, y = utilization, col = execution)) +
-        stat_smooth(aes(group=execution), method="loess", degree=0.6, span=0.1, se=FALSE) +
+        stat_smooth(aes(group=execution), method="loess", span=0.1, se=FALSE) +
         theme(
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
@@ -37,7 +37,7 @@ shinyServer(function(input, output) {
         filter(execution %in% input$selectTag) # %>%
 
       ggplot(data, aes(x = seconds, y = util, col = execution)) +
-        geom_smooth(aes(group=execution), method = "loess", degree=0.6, span=0.1, se = FALSE) +
+        geom_smooth(aes(group=execution), method = "loess", span=0.1, se = FALSE) +
         theme(
               axis.text.x = element_blank(),
               axis.ticks.x = element_blank(),
@@ -57,7 +57,7 @@ shinyServer(function(input, output) {
         filter(execution %in% input$selectTag) 
       
       ggplot(data, aes(x = seconds, y = Memory, col = execution)) +
-        geom_smooth(aes(group=execution), method="loess", degree=0.6, span=0.1, se=FALSE) +
+        geom_smooth(aes(group=execution), method="loess", span=0.1, se=FALSE) +
         theme(
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
@@ -77,14 +77,14 @@ shinyServer(function(input, output) {
         filter(execution %in% input$selectTag)
       
       ggplot(data, aes(x = seconds, y = Temperature, col = execution)) +
-        geom_smooth(aes(group=execution), method = "loess", span=0.05, degree=0.7, se = FALSE) +
+        geom_smooth(aes(group=execution), method = "loess", span=0.05, se = FALSE) +
         theme(
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           axis.title.x = element_text(size = 10)) +
-        labs(colour="Hardware") +
+        labs(colour="Running on:") +
         #ylim(0,100) +
-        ylab("Temperature") +
+        ylab("Temperature (Percent of Maximum)") +
         xlab("Seconds")
     })
   })
@@ -97,14 +97,14 @@ shinyServer(function(input, output) {
         filter(execution %in% input$selectTag) # %>%
       
       ggplot(data, aes(x = seconds, y = Temperature, col = execution)) +
-        geom_smooth(aes(group=execution), method = "loess", span=0.05, degree=0.7, se = FALSE) +
+        geom_smooth(aes(group=execution), method = "loess", span=0.05, se = FALSE) +
         theme(
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           axis.title.x = element_text(size = 10)) +
-        labs(colour="Hardware") +
+        labs(colour="Running on:") +
         #ylim(0,100) +
-        ylab("Temperature") +
+        ylab("Temperature (Percent of Maximum)") +
         xlab("Seconds")
     })
   })

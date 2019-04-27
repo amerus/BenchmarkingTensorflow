@@ -55,11 +55,11 @@ shinyUI(
               plotlyOutput("mem", height = 600)
             ),
             tabPanel(
-              title = "Processor Run Heat",
+              title = "Processor Temperature",
               plotlyOutput("cpuTemp", height = 600)
             ),
             tabPanel(
-              title = "GPU Run Heat",
+              title = "GPU Temperature",
               plotlyOutput("gpuTemp", height = 600)
             ),
             tabPanel(
