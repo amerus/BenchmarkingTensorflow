@@ -29,56 +29,75 @@ shinyUI(
                             value = c(min, max),
                             sep = ""
                         ),
+                selectInput("selectHardware",
+                            label = "",
+                            choices = selHard,
+                            multiple = TRUE,
+                            selected = unlist(head(selHard, n = 1)),
+                            selectize = FALSE, size = 7
+                        ),
                 selectInput("selectTag",
-                            label = "Training Resource:",
+                            label = "",
                             choices = dropDownTags,
                             multiple = TRUE,
-                            selected = unlist(dropDownTags))
+                            selected = unlist(dropDownTags),
+                            selectize = FALSE, size = 3
+                            ),
+                tags$hr(width='50%'),
+                selectInput(
+                          "selectWaldo",
+                          label = "Choose Waldo Image:",
+                          choices = selWaldo,
+                          selected = "",
+                          selectize = FALSE, size = 7
+                          ),
+                radioButtons(
+                          "radioWaldo",
+                          label = NULL,
+                          choices = c("CPU Trained", "GPU Trained"),
+                          selected = "CPU",
+                          inline = TRUE
+                          ),
+                actionButton("btnWaldo", "Find Waldo")
                 ),
         
         dashboardBody(
-           tabsetPanel(
+           tabsetPanel(id="myTabs",
              tabPanel(
-               title = "Custom BASH Shell Script",
-               uiOutput("googleSheet")
+               title = "BASH Shell Script",
+               #verbatimTextOutput("googleSheet")
+               codeOutput("googleSheet")
              ),
              tabPanel(
-                title = "Processor Utilization", status = "primary", solidHeader = TRUE,
-                plotlyOutput("cpu", height = 600)
+                title = "Processor Utilization",
+                plotOutput("cpu", height = 600)
               ),
             tabPanel(
-                title = "Disk I/O",
-                plotlyOutput("disk", height = 600)
+                title = "Disk Utilization",
+                plotOutput("disk", height = 600)
               ),
             tabPanel(
-              title = "Memory Usage",
-              plotlyOutput("mem", height = 600)
+              title = "Memory Utilization",
+              plotOutput("mem", height = 600)
             ),
             tabPanel(
               title = "Processor Temperature",
-              plotlyOutput("cpuTemp", height = 600)
+              plotOutput("cpuTemp", height = 600)
             ),
             tabPanel(
-              title = "GPU Temperature",
-              plotlyOutput("gpuTemp", height = 600)
+              title = "Graphics Temperature",
+              plotOutput("gpuTemp", height = 600)
             ),
             tabPanel(
-              title = "Find Waldo - Part 1",
-              tags$p(),
-              actionButton("buttonGPU1", "GPU Trained"),
-              actionButton("buttonCPU1", "CPU Trained"),
-              tags$p(),
-              plotOutput("findIMG1", height = 768)
+              title = "Combined Bar Chart",
+              plotOutput("ALL", height = 600)
             ),
             tabPanel(
-              title = "Find Waldo - Part 2",
-              tags$p(),
-              actionButton("buttonGPU3", "GPU Trained"),
-              actionButton("buttonCPU3", "CPU Trained"),
-              tags$p(),
-              plotOutput("findIMG3", height = 768)
+              title = "Waldo",
+              plotOutput("defaultImage", height = 768)
             )
          )
+         
       )
     )
  )

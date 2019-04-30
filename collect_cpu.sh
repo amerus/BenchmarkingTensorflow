@@ -50,16 +50,13 @@ export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64
 
 # training the network
 CUDA_VISIBLE_DEVICES="" timeout $RUNTIME python3 $MODEL_MAIN/model_main.py --pipeline_config_path=$PIPELINE/pipeline.config --model_dir=$MODEL_DIR &
+# saving process id of the benchmark script into a variable
 PSModel=$!
 
 # sleeping for 5 seconds while Tensorflow warms up
 sleep 5
 
-# saving process id of the benchmark script into a variable
-#PID=`ps -ef|grep 'model_main.py' | head -1 | awk -F" " '{print $2}'`
-
 # while the process id of the benchmark script exists, collect data
-# while test -d /proc/$PID; do
 while test -d /proc/$PSModel; do
        # use sensors from lm-sensors package for CPU temperature
        sensors | grep Package | awk -F"+" '{print $2}' | awk -F"°" '{print $1}' >> $LOGDIR/cputemp.out &

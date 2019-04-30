@@ -1,26 +1,35 @@
 library(shinydashboard)
 library(tidyverse)
 library(ggplot2)
-library(plotly)
-library(googlesheets)
+library(codeModules)
 library(DT)
+library(naturalsort)
 
 # load saved metrics from RDS files
-CPU <- readRDS('./data/cpu.RDS')
-DISK <- readRDS('./data/disk.RDS')
-MEM <- readRDS('./data/mem.RDS')
-CPU_TEMP <- readRDS('./data/cpuTemp.RDS')
-GPU_TEMP <- readRDS('./data/gpuTemp.RDS')
+ALL <- readRDS('./data/ALL.RDS')
 
-# slider controls populated from one of the RDS files. It can be any, since runtime is identical.
-sliderSeconds <- as.data.frame(CPU) %>%
+# slider controls populated from one of the RDS files. 
+sliderSeconds <- as.data.frame(ALL) %>%
   select(seconds) %>%
   unique() %>%
   unlist() %>%
   as.numeric()
 
-# dropdown controls of execution - CPU versus CUDA. Loadning from CPU RDS but can be any.
-dropDownTags <- CPU %>%
+# dropdown controls of execution - CPU versus CUDA. 
+dropDownTags <- ALL %>%
   group_by(execution) %>%
   select(execution) %>%
   unique()
+
+colnames(dropDownTags) <- "Trained on:"
+
+# dropdown controls for hardware selection.
+selHard <- ALL %>%
+  group_by(Hardware) %>%
+  select(Hardware) %>%
+  unique()
+
+colnames(selHard) <- "Affected Hardware:"
+
+# dropdown controls for Waldo image selection.
+selWaldo <- list.files(path = './waldo/images', pattern = '.jpg') %>% naturalsort()

@@ -6,8 +6,11 @@ import matplotlib
 from PIL import Image
 import matplotlib.patches as patches
 import argparse
+import re
 
 model_path = '/home/motorns/Documents/datascience/finalproject/waldo/inferenceGraphCPU/frozen_inference_graph.pb'
+file_output = './images/cpu/'
+
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
@@ -67,5 +70,14 @@ with detection_graph.as_default():
     print('Wally found')
     fig, ax = draw_box(boxes[0][0], image_np)
   
-    ax.imshow(image_np)
-    plt.show()
+    plt.axis("off")
+    fig = ax.imshow(image_np)
+    orig = args.image_path
+    p = re.compile(r'(\d+\.\w{3}$)')
+    m = p.search(orig)
+    filename = file_output + m.group(1)
+    fig.axes.get_xaxis().set_visible(False)
+    fig.axes.get_yaxis().set_visible(False)
+    plt.savefig(filename,bbox_inches="tight",pad_inches = 0)
+    #plt.show()
+    plt.close()
