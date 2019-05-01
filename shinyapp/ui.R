@@ -1,5 +1,3 @@
-
-# Define UI
 shinyUI(
     dashboardPage(
         dashboardHeader(title = 'Where is Waldo?'),
@@ -65,8 +63,7 @@ shinyUI(
            tabsetPanel(id="myTabs",
              tabPanel(
                title = "BASH Shell Script",
-               #verbatimTextOutput("googleSheet")
-               codeOutput("googleSheet")
+               codeOutput("shellScript")
              ),
              tabPanel(
                 title = "Processor Utilization",

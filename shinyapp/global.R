@@ -1,21 +1,21 @@
 library(shinydashboard)
 library(tidyverse)
 library(ggplot2)
-library(codeModules)
 library(DT)
 library(naturalsort)
+library(codeModules)
 
 # load saved metrics from RDS files
 ALL <- readRDS('./data/ALL.RDS')
 
-# slider controls populated from one of the RDS files. 
+# slider controls for seconds 
 sliderSeconds <- as.data.frame(ALL) %>%
   select(seconds) %>%
   unique() %>%
   unlist() %>%
   as.numeric()
 
-# dropdown controls of execution - CPU versus CUDA. 
+# dropdown controls for execution (Processor/Graphics Card) selection 
 dropDownTags <- ALL %>%
   group_by(execution) %>%
   select(execution) %>%
@@ -23,7 +23,7 @@ dropDownTags <- ALL %>%
 
 colnames(dropDownTags) <- "Trained on:"
 
-# dropdown controls for hardware selection.
+# dropdown controls for hardware selection
 selHard <- ALL %>%
   group_by(Hardware) %>%
   select(Hardware) %>%
@@ -31,5 +31,5 @@ selHard <- ALL %>%
 
 colnames(selHard) <- "Affected Hardware:"
 
-# dropdown controls for Waldo image selection.
+# dropdown controls for Waldo image selection
 selWaldo <- list.files(path = './waldo/images', pattern = '.jpg') %>% naturalsort()

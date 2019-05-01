@@ -1,33 +1,26 @@
-
-# Define server logic required to draw a plot
-
 CPUScript <- "./data/collect_cpu.sh"
 GPUScript <- "./data/collect_gpu.sh"
 
 shinyServer(function(input, output) {
   
-  output$googleSheet <- renderCode({
-    if(unlist(head(input$selectTag, n = 1)) == "Processor"){
-      script = CPUScript
-    } else {
-      script = GPUScript
-    }
-    read_file(script)
-  })
-
+  # Hiding and showing individual tabs upon selection
   observeEvent(input$selectHardware, {
     
     tabData <- input$selectHardware
     
+    # Hide all tabls as ANY selection is recorded
     for(val in unlist(selHard)){
       hideTab("myTabs", val)
+      # If fewer than 2 hardware components are selected, hide the comparison tab
       if(length(tabData) < 2){
         hideTab("myTabs","Combined Bar Chart")
       }
     }
     
+    # Showing individual tabs upon selection
     for(val in unlist(tabData)){
       showTab("myTabs", val, select=TRUE)
+      
       if(length(tabData) >= 2){
         showTab("myTabs","Combined Bar Chart", select=TRUE)
       }
@@ -35,6 +28,17 @@ shinyServer(function(input, output) {
     
   })
   
+  # Updating shell script display upon selection. Uses codeModules library
+  output$shellScript <- renderCode({
+    if(unlist(head(input$selectTag, n = 1)) == "Processor"){
+      script = CPUScript
+    } else {
+      script = GPUScript
+    }
+    read_file(script)
+  })
+ 
+  # Function to be reused inside of each tab. Returns basic ggplot, which interacts with all of the inputs
   getPlotData <- function(incomingData) {
     data <- incomingData %>%
       filter(seconds >= (max(sliderSeconds) * input$selectSeconds[1] / 100) & seconds <= (max(sliderSeconds) * input$selectSeconds[2]) / 100 ) %>%
@@ -42,13 +46,11 @@ shinyServer(function(input, output) {
       filter(execution %in% input$selectTag)
     
     ggBasic <- ggplot(data, aes(x = seconds, y = Utilization, col = execution)) +
-      stat_smooth(aes(group=execution), method="loess", span=0.1, se=FALSE) +
+      stat_smooth(aes(group=execution), method="loess", span=0.05, se=FALSE) +
       theme(
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
-        axis.text.y = element_text(size = 15),
-        axis.title.x = element_text(size = 20),
-        axis.title.y = element_text(size = 20)) +
+        text = element_text(size=20)) +
       labs(colour="Trained on:") +
       xlab("Seconds")
     
@@ -65,14 +67,14 @@ shinyServer(function(input, output) {
 
       graph <- getPlotData(ALL)
       graph +
-      ylab("Disk I/O (Percent)")
+      ylab("Disk Utilization (Percent)")
   })
 
   output$mem <- renderPlot({
 
       graph <- getPlotData(ALL)
       graph +
-      ylab("Memory Usage (Percent of Total)")
+      ylab("Memory Utilization (Percent of Total)")
   })  
   
   output$cpuTemp <- renderPlot({
