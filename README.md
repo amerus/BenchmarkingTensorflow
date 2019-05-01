@@ -1,5 +1,6 @@
-# BenchmarkingTensorflow
-Gathering and Analyzing Hardware Performance Data During Deep Network Training
+#### Gathering and Analyzing Hardware Performance Data During Deep Network Training
+### Tensorflow, Object Detection, Faster R-CNN with Inception, Bash Script, and R Shiny
+[Live Demo](https://amerus.shinyapps.io/TensorflowBenchmarking/)
 <table style = "border: none">
   <tr>
     <td> 
