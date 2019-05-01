@@ -14,7 +14,7 @@ Gathering and Analyzing Hardware Performance Data During Deep Network Training
     <img src="https://user-images.githubusercontent.com/33165031/57023767-85a8bb80-6bf8-11e9-95b0-7b3f15464581.gif">
     </td>
     <td>
-    <img src="https://user-images.githubusercontent.com/33165031/57024740-f3ee7d80-6bfa-11e9-9466-9db8ce31c464.gif">
+    <img src="https://user-images.githubusercontent.com/33165031/57024935-6eb79880-6bfb-11e9-96ff-ee752077383d.gif">
     </td>
   </tr>
 </table>
