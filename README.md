@@ -5,7 +5,9 @@ The project focuses on collecting and analyzing hardware benchmarks while traini
 ### Motivation
 ### Null and Alternative Hypotheses
 **Null Hypothesis**
+Training Tensorflow deep neural network on the CPU and the GPU does not yield any quantifiably observable diffirences. Hardware utilization is objectively the same.
 **Alternative Hypothesis**
+Training Tensorflow deep neural network on the CPU and the GPU yields different hardware utilization patterns, which are clearly quantifiable and observable.
 ### Previous Work
 #### Tensorflow Own Benchmarking (limitations)
 #### Find Wally
@@ -33,4 +35,5 @@ The project focuses on collecting and analyzing hardware benchmarks while traini
     </td>
   </tr>
 </table>
-[Live Demo](https://amerus.shinyapps.io/TensorflowBenchmarking/)
+
+[Live Demo] (https://amerus.shinyapps.io/TensorflowBenchmarking/)
