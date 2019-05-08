@@ -1,6 +1,19 @@
 #### Gathering and Analyzing Hardware Performance Data During Deep Network Training
 ### Tensorflow, Object Detection, Faster R-CNN with Inception, Bash Script, and R Shiny
-[Live Demo](https://amerus.shinyapps.io/TensorflowBenchmarking/)
+### Overview
+### Motivation
+### Null and Alternative Hypotheses
+** Null Hypothesis **
+** Alternative Hypothesis **
+### Previous Work
+## Tensorflow Own Benchmarking (limitations)
+## Find Wally
+### Data Collection Script
+### Tested Hardware
+### R Shiny Application
+### Findings
+### Portability and Future Work
+### Interactivity Screenshots
 <table style = "border: none">
   <tr>
     <td> 
@@ -19,3 +32,4 @@
     </td>
   </tr>
 </table>
+[Live Demo](https://amerus.shinyapps.io/TensorflowBenchmarking/)
