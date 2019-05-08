@@ -10,14 +10,19 @@ Currently, I am a Senior Systems Administrator at a research university. My infr
 ### Null and Alternative Hypotheses
 
 **Null Hypothesis**
-#### Part A:
+
+**Part A:**
    Training Tensorflow deep neural network on the CPU vs. the GPU does not yield any quantifiably observable diffirences. Hardware utilization is objectively the same. 
-#### Part B:
+
+**Part B:**
    Training Tensorflow object detection model on the CPU vs. the GPU does not accelerate research process. 
+   
 **Alternative Hypothesis**
-#### Part A:
+
+**Part A:**
    Training Tensorflow deep neural network on the CPU vs. the GPU yields different hardware utilization patterns, which are clearly quantifiable and observable.
-#### Part B:
+
+**Part B:**
    Training Tensorflow object detection model on the CPU vs. GPU has potential to accelerate research process.
 ### Previous Work
 #### Tensorflow Own Benchmarking (limitations)
