@@ -108,4 +108,5 @@ The loop will go through Wally images looking for him and saving the resulting m
 <hr width="50%">
 ### Live Demo ###
 Click below to see live demo of the final R Shiny App:
-   [Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking/)
+
+   [Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking)
