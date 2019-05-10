@@ -26,8 +26,12 @@ Currently, I am a Senior Systems Administrator at a research university. My infr
    Training Tensorflow object detection model on the CPU vs. GPU has potential to accelerate research process.
 ### Previous Work
 #### Tensorflow Own Benchmarking (limitations)
+Tensorflow has several own [benchmark utilities](https://github.com/tensorflow/benchmarks). I have unsuccessfully tried working with them. I was surprised to find very little documentation on how to use these benchmarking instruments. Additionally, I was bewildered by the fact that tf_cnn_benchmark required installation and configuration of Google cloud services. I could not find a good reason to install and configure Google cloud services on my research servers just to benchmark Tensorflow training runs. Finally, it did not seem that anything was collecting disk, memory, processor, and temperature at the same (and equal) time intervaals. Hence, I have finally decided to write my own script.
 #### Find Wally
+I work at a research facility, which uses Tensorflow for markerless tracking of primates. Rules of engagement dictate that I cannot share or distribute the media collected at the facility. Hence, I had to find a proxy object detection mechanism. Being a dad of two boys, I was elated to stumble upon Tadej Magajna's [HereIsWally](https://github.com/tadejmagajna/HereIsWally) project. There is no harm in working while having fun, is there? 
 ### Data Collection Script
+The script I wrote uses Bourne Again Shell (BASH) to set several variables, train Tensorflow network for a set amount of time, collect hardware metrics, and export the resulting Tensorflow chekpoint into a ready to be used inference database. In theory, it should not be difficult to modify the script to execute a different model or run on a different hardware. In the long run, I'd like to package it into a Docker image together with several pre-configured Tensorflow models. The repository has two versions of the script, since my hypotheses deal with GPU vs. CPU training comparisons. I wanted to have a clear way to run the script (and save the results into different directories). collect_cpu.sh trains the model on the processor while collect_gpu.sh does the same using the GPU. 
+### Python Script Modification(s)
 ### Tested Hardware
 ### R Shiny Application
 ### Findings
