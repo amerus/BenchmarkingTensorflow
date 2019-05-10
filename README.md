@@ -75,7 +75,8 @@ I modified confidence score to be low, so I could see Tensorflow mistakes:
         sys.exit('Wally not found :(')
    ```
 Finally, I was able to run a simple terminal for loop:
-   ```for i in *jpg; do
+   ```
+   for i in *jpg; do
       python3 find_wally_GPU.sh $i
    done
    ```
@@ -85,9 +86,9 @@ The loop will go through Wally images looking for him and saving the resulting m
 This script was tested on the following hardware
 <table style = "border: none">
   <tr>
-    <th>
+     <td colspan=4>
        Gigabyte Aero 15x Laptop
-    </th>
+     </td>
   </tr>
   <tr>
     <td>
