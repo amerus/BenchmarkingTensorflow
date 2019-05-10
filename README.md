@@ -86,7 +86,7 @@ The loop will go through Wally images looking for him and saving the resulting m
 This script was tested on the following hardware
 <table style = "border: none">
   <tr>
-     <td colspan=4>
+     <td colspan=4 align=center>
        Gigabyte Aero 15x Laptop
      </td>
   </tr>
