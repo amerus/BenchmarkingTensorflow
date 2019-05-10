@@ -32,7 +32,51 @@ I work at a research facility, which uses Tensorflow for markerless tracking of 
 ### Data Collection Script
 The script I wrote uses Bourne Again Shell (BASH) to set several variables, train Tensorflow network for a set amount of time, collect hardware metrics, and export the resulting Tensorflow chekpoint into a ready to be used inference database. In theory, it should not be difficult to modify the script to execute a different model or run on a different hardware. In the long run, I'd like to package it into a Docker image together with several pre-configured Tensorflow models. The repository has two versions of the script, since my hypotheses deal with GPU vs. CPU training comparisons. I wanted to have a clear way to run the script (and save the results into different directories). collect_cpu.sh trains the model on the processor while collect_gpu.sh does the same using the GPU. 
 ### Python Script Modification(s)
+#### model_train.py
+The GPU card, which was used for this project is GeForce RTX 2070 with Max-Q Design. 
+CUDA libraries were failing to load from inside of Tensorflow until I added the following line:
+   config.gpu_options.allow_growth = True
+Current Tensorflow suppresses output by default, so I also had to add the following two lines to be able to see loss values:
+   tf.logging.set_verbosity(tf.logging.INFO)
+   config = tf.ConfigProto()
+   sess = tf.Session(config=config)
+I also wanted to save checkpoints every 60 seconds because my shell script ran training script for a limited amount of time (75 minutes). Hence, I added the save_checkpoints_secs=60 parameter: 
+   config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir, save_checkpoints_secs=60)
+#### find_wally_GPU.sh and find_wally_CPU.sh
+These scripts are modified versions of Tadej's [find_wally_pretty.sh](https://github.com/tadejmagajna/HereIsWally/blob/master/find_wally_pretty.py). I wanted to be able to find Waldo in a scripted manner saving output files into a separate directory. Hence, I've added the following to the bottom of the file:
+
+    plt.axis("off")
+    fig = ax.imshow(image_np)
+    orig = args.image_path
+    p = re.compile(r'(\d+\.\w{3}$)')
+    m = p.search(orig)
+    filename = file_output + m.group(1)
+    fig.axes.get_xaxis().set_visible(False)
+    fig.axes.get_yaxis().set_visible(False)
+    plt.savefig(filename,bbox_inches="tight",pad_inches = 0)
+    plt.close()
+
+I also had to import regular expressions and set inference graph location and output directory:
+
+import re
+
+model_path = '/home/motorns/Documents/datascience/finalproject/waldo/inferenceGraphCPU/frozen_inference_graph.pb'
+file_output = './images/cpu/'
+
+I modified confidence score to be low, so I could see Tensorflow mistakes:
+if scores[0][0] < 0.0001:
+        sys.exit('Wally not found :(')
+
+Finally, I was able to run a simple terminal for loop:
+
+   for i in *jpg; do
+   python3 find_wally_GPU.sh
+   done
+
+The loop will go through Wally images looking for him and saving the resulting matplotlib figures into files with the same names but corresponding (cpu or gpu) directories.
+
 ### Tested Hardware
+### Conda Environment File
 ### R Shiny Application
 ### Findings
 ### Portability and Future Work
@@ -55,5 +99,6 @@ The script I wrote uses Bourne Again Shell (BASH) to set several variables, trai
     </td>
   </tr>
 </table>
-
-[Live Demo](https://amerus.shinyapps.io/TensorflowBenchmarking/)
+<hr width="50%">
+### Live Demo
+[Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking/)
