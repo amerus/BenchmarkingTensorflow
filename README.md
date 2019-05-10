@@ -63,23 +63,22 @@ These scripts are modified versions of Tadej's [find_wally_pretty.sh](https://gi
     plt.close()
 
 I also had to import regular expressions and set inference graph location and output directory:
-   ```
+   ```   
    import re
 
    model_path = '/home/motorns/Documents/datascience/finalproject/waldo/inferenceGraphCPU/frozen_inference_graph.pb'
    file_output = './images/cpu/'
    ```
 I modified confidence score to be low, so I could see Tensorflow mistakes:
-```
+   ```
    if scores[0][0] < 0.0001:
         sys.exit('Wally not found :(')
-```
+   ```
 Finally, I was able to run a simple terminal for loop:
-```
-   for i in *jpg; do
-      python3 find_wally_GPU.sh
+   ```for i in *jpg; do
+      python3 find_wally_GPU.sh $i
    done
-```
+   ```
 The loop will go through Wally images looking for him and saving the resulting matplotlib figures into files with the same names but corresponding (cpu or gpu) directories.
 
 ### Tested Hardware
@@ -107,6 +106,6 @@ The loop will go through Wally images looking for him and saving the resulting m
   </tr>
 </table>
 <hr width="50%">
-### Live Demo
-
-[Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking/)
+### Live Demo ###
+Click below to see live demo of the final R Shiny App:
+   [Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking/)
