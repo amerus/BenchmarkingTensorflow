@@ -86,6 +86,20 @@ This script was tested on the following hardware
 <table style = "border: none">
   <tr>
     <td>
+     Processor
+    </td>
+    <td>
+     Memory
+    <td>
+    <td>
+     Graphics Card
+    </td>
+    <td>
+     Hard Drive
+    </td>
+  </tr>
+  <tr>
+    <td>
      Intel 6-core i9-8950HK CPU @ 2.90GHz
     </td>
   </tr>
