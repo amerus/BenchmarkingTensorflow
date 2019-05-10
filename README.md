@@ -82,6 +82,19 @@ Finally, I was able to run a simple terminal for loop:
 The loop will go through Wally images looking for him and saving the resulting matplotlib figures into files with the same names but corresponding (cpu or gpu) directories.
 
 ### Tested Hardware
+This script was tested on the following hardware
+<table style = "border: none">
+  <tr>
+    <td>
+     Intel 6-core i9-8950HK CPU @ 2.90GHz
+    </td>
+  </tr>
+    <td>
+    32 GB of RAM. Speed: 2667 MT/s
+    </td>
+  <tr>
+  </tr>
+</table>
 ### Conda Environment File
 ### R Shiny Application
 ### Findings
@@ -106,7 +119,8 @@ The loop will go through Wally images looking for him and saving the resulting m
   </tr>
 </table>
 <hr width="50%">
-### Live Demo ###
+### Live Demo
+
 Click below to see live demo of the final R Shiny App:
 
    [Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking)
