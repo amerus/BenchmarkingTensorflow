@@ -35,13 +35,19 @@ The script I wrote uses Bourne Again Shell (BASH) to set several variables, trai
 #### model_train.py
 The GPU card, which was used for this project is GeForce RTX 2070 with Max-Q Design. 
 CUDA libraries were failing to load from inside of Tensorflow until I added the following line:
-   config.gpu_options.allow_growth = True
+
+   ```config.gpu_options.allow_growth = True```
+
 Current Tensorflow suppresses output by default, so I also had to add the following two lines to be able to see loss values:
+   ```
    tf.logging.set_verbosity(tf.logging.INFO)
    config = tf.ConfigProto()
    sess = tf.Session(config=config)
+   ```
 I also wanted to save checkpoints every 60 seconds because my shell script ran training script for a limited amount of time (75 minutes). Hence, I added the save_checkpoints_secs=60 parameter: 
-   config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir, save_checkpoints_secs=60)
+
+   ```config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir, save_checkpoints_secs=60)```
+
 #### find_wally_GPU.sh and find_wally_CPU.sh
 These scripts are modified versions of Tadej's [find_wally_pretty.sh](https://github.com/tadejmagajna/HereIsWally/blob/master/find_wally_pretty.py). I wanted to be able to find Waldo in a scripted manner saving output files into a separate directory. Hence, I've added the following to the bottom of the file:
 
@@ -57,22 +63,23 @@ These scripts are modified versions of Tadej's [find_wally_pretty.sh](https://gi
     plt.close()
 
 I also had to import regular expressions and set inference graph location and output directory:
+   ```
+   import re
 
-import re
-
-model_path = '/home/motorns/Documents/datascience/finalproject/waldo/inferenceGraphCPU/frozen_inference_graph.pb'
-file_output = './images/cpu/'
-
+   model_path = '/home/motorns/Documents/datascience/finalproject/waldo/inferenceGraphCPU/frozen_inference_graph.pb'
+   file_output = './images/cpu/'
+   ```
 I modified confidence score to be low, so I could see Tensorflow mistakes:
-if scores[0][0] < 0.0001:
+```
+   if scores[0][0] < 0.0001:
         sys.exit('Wally not found :(')
-
+```
 Finally, I was able to run a simple terminal for loop:
-
+```
    for i in *jpg; do
-   python3 find_wally_GPU.sh
+      python3 find_wally_GPU.sh
    done
-
+```
 The loop will go through Wally images looking for him and saving the resulting matplotlib figures into files with the same names but corresponding (cpu or gpu) directories.
 
 ### Tested Hardware
@@ -101,4 +108,5 @@ The loop will go through Wally images looking for him and saving the resulting m
 </table>
 <hr width="50%">
 ### Live Demo
+
 [Tensorflow Benchmarking](https://amerus.shinyapps.io/TensorflowBenchmarking/)
