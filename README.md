@@ -86,10 +86,15 @@ This script was tested on the following hardware
 <table style = "border: none">
   <tr>
     <td>
+       Gigabyte Aero 15x Laptop
+    </td>
+  </tr>
+  <tr>
+    <td>
      Processor
     </td>
     <td>
-     Random Access Memory
+     RAM
     </td>
     <td>
      Graphics Card
@@ -114,11 +119,26 @@ This script was tested on the following hardware
   <tr>
   </tr>
 </table>
-### Conda Environment File
-### R Shiny Application
-### Findings
-### Portability and Future Work
-### Interactivity Screenshots
+
+###Conda Environment File
+Anaconda environment file contains remnants from trying (and failing) to use Tensorflow's own benchmarking utilities. However, it does work and is needed to train the network. It can be created:
+```
+   conda env create -f benchmark.yml
+```
+It will create an environment named bench, which can then be imported:
+```
+   conda activate bench
+```
+###R Shiny Application
+Every control of the R Shiny application works with every ggplot graph. Selecting several hardware components adds a side-by-side comparison panel. Feel free to inspect interactivity screenshots for visual examples.
+
+###Findings
+CPU-trained model was a lot less accurate as seen in the app because 75 minutes of training translated into only 3,421 steps. When training for the same time on the GPU, the model was able to complete 34,264 steps (ten times as many). As also seen in the app, processor utilization is minimal when GPU training is taking place. Hece, in theory, GPU training is beneficial on a shared server. While the graphics card is doing the heavy lifting, the processor is free to perform other tasks. One surprise finding was the difficulty of temperature control during the GPU training run. Both the graphics card and the processor temperatures were climbing steadily with the GPU getting dangerously close to 98 Celsius. Heat damage is a real threat for Tensorflow on GPU.
+
+###Portability and Future Work
+
+###Interactivity Screenshots
+
 <table style = "border: none">
   <tr>
     <td> 
