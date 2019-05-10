@@ -85,9 +85,9 @@ The loop will go through Wally images looking for him and saving the resulting m
 This script was tested on the following hardware
 <table style = "border: none">
   <tr>
-    <td>
+    <th>
        Gigabyte Aero 15x Laptop
-    </td>
+    </th>
   </tr>
   <tr>
     <td>
@@ -165,7 +165,7 @@ Template portability needs work. Ideally, the entire project should be compiled 
 
 <hr width="50%">
 
-###Live Demo
+### Live Demo
 
 Click below to see live demo of the final R Shiny App:
 
