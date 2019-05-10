@@ -1,7 +1,7 @@
 #### Gathering and Analyzing Hardware Performance Data During Deep Network Training
 ### Tensorflow, Object Detection, Faster R-CNN with Inception, Bash Script, and R Shiny
 ### Overview
-   The project focuses on collecting and analyzing hardware benchmarks while training a deep learning network. Training deep learning networks is a resource-intensive and time-consuming process. Building a well-performing pipeline requires identifying low throughput areas and mitigating them with either software tuning or hardware upgrades. Low throughput areas depend on the variability of chosen models, data types, and individual programming styles. Objective benchmark measurement is necessary in order to successfully address heavy system load and uneven utilization of the underlying components. The project consists of a Bash shell script, which collects five system metrics: processor temperature, processor utilization, disk input/output utilization, memory usage, and GPU temperature. Each metric is collected while training Tensorflow's object detection (Faster R-CNN) model to look for Waldo. The metrics are visualized via an interactive R Shiny application.
+   The project focuses on collecting and analyzing hardware benchmarks while training a deep learning network. Training deep learning networks is a resource-intensive and time-consuming process. Building a well-performing pipeline requires identifying low throughput areas and mitigating them with either software tuning or hardware upgrades. Low throughput areas depend on the variability of chosen models, data types, and individual programming styles. Objective benchmark measurement is necessary in order to successfully address heavy system load and uneven utilization of the underlying components. The project consists of a Bash shell script, which collects five system metrics: processor temperature, processor utilization, disk input/output utilization, memory usage, and GPU temperature. Each metric is collected while training Tensorflow's object detection (faster R-CNN with inception) model to look for Waldo. The metrics are visualized via an interactive R Shiny application.
 ### Motivation
 #### General Motivation
 System Administration and Engineering is a profession tasked with continuous evaluation and improvement of system performance. Kernel and end-user processes generate utilization spikes. Frequently, the spikes are uneven with a particular system resource causing a system-wide slowdown. Shared servers used for training deep learning networks are in need of constant optimization, which is frequently unique to a specific training type. Having a shell script, which can collect system utilization paired with an interactive R Shiny application will help System Engineers perform custom infrastructure tuning.
@@ -89,8 +89,8 @@ This script was tested on the following hardware
      Processor
     </td>
     <td>
-     Memory
-    <td>
+     Random Access Memory
+    </td>
     <td>
      Graphics Card
     </td>
@@ -102,9 +102,14 @@ This script was tested on the following hardware
     <td>
      Intel 6-core i9-8950HK CPU @ 2.90GHz
     </td>
-  </tr>
     <td>
-    32 GB of RAM. Speed: 2667 MT/s
+     32 GB, Speed: 2667 MT/s
+    </td>
+    <td>
+     GeForce RTX 2070 with Max-Q Design
+    </td>
+    <td>
+     Intel SSD Pro 7600p/760p/E 6100p Series 
     </td>
   <tr>
   </tr>
@@ -132,8 +137,10 @@ This script was tested on the following hardware
     </td>
   </tr>
 </table>
+
 <hr width="50%">
-### Live Demo
+
+###Live Demo
 
 Click below to see live demo of the final R Shiny App:
 
